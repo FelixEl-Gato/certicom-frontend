@@ -1,0 +1,38 @@
+<div class="p-2 flex justify-content-between align-items-center pl-4">
+  <h2 class="align-self-center m-0">Detalles de la venta</h2>
+  <button class="p-col-fixed" mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div *ngIf="venta">
+
+  <mat-accordion multi>
+    <mat-expansion-panel [expanded]="true" class="p-col-12">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{'cliente' | titlecase}} </mat-panel-title>
+        <mat-icon>account_circle</mat-icon>
+        <mat-panel-description>
+          {{venta.fecha | date: 'dd/MM/yyyy'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <component-form-customer [cliente]="venta.cliente"></component-form-customer>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{'productos vendidos' | titlecase}}</mat-panel-title>
+        <mat-panel-description>
+          Precio total: {{getTotal() | currency: 'PEN': 'symbol-narrow' :'1.2-2'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <component-table-detalles-venta [detallesVenta]="venta.detallesVenta"></component-table-detalles-venta>
+
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+</div>
